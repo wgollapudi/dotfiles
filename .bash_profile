@@ -29,7 +29,8 @@ export PAGER=less
 export LESS='-SRi'
 
 # Set default cc(1) options
-if command -v gcc-14 &>/dev/null ; then                                                      export CC=gcc-14
+if command -v gcc-14 &>/dev/null ; then
+	export CC=gcc-14
 fi
 
 # Include user bin directory in path
@@ -38,7 +39,8 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 # Include users private bin directory in path
-if [ -d "$HOME/.local/bin" ] ; then                                                          PATH="$HOME/.local/bin:$PATH"
+if [ -d "$HOME/.local/bin" ] ; then
+	PATH="$HOME/.local/bin:$PATH"
 fi
 
 export PATH

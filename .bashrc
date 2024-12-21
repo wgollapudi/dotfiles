@@ -1,73 +1,104 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+###
+### BASH INITALIZATION SCRIPT AND CONFIGURATION FILE
+###
+### Copyright (C) 2024 Walker Gollapudi <wgollapudi@outlook.com>
+### MIT License. See LICENSE file for details.
+###
 
-# Personal aliases
-alias tmux='tmux -f ~/.config/tmux/tmux.conf'
-alias ..='cd ..'
-
-# If not running interactively, don't do anything
+# If the shell is not non-interactive, exit early 
 case $- in
     *i*) ;;
       *) return;;
 esac
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
+### SOURCE $HOME/.config/aliases ###
 
-# append to the history file, don't overwrite it
-shopt -s histappend
+if [ -r "$HOME/.config/aliases" ]; then
+    . "$HOME/.config/aliases" 
+fi
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
+### GENERAL OPTIONS ###
+
+# Prevent file overwrite on stdout redirection
+# Use '>|' to force redirection to an existing file
+set -o noclobber
+
+# Automaticaly trim long paths in the prompt (requires Bash 4.x)
+PROMPT_DIRTRIM=2
+
+# Updates 'LINES' and 'COLUMNS' variables after every command, ensuring correct
+# 	terminal sizing
 shopt -s checkwinsize
 
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
+# Enables recursive matching with '**' (e.g., 'ls **/*.txt' to list all .txt files
+# 	in subdirectories
+shopt -s globstar 2> /dev/null
 
-# make less more friendly for non-text input files, see lesspipe(1)
+# Use standard ISO 8601 timestamp
+# %F equivalent to %Y-%m-%d
+# %T equivalent to $H:%M:%S (24-hours format)
+HISTTIMEFORMAT='%F %T '
+
+
+### HISTORY CONFIGURATION ###
+
+# Prevents duplicate entries and lines starting with a space from being saved
+# 	in history
+# See bash(1) for more options
+HISTCONTROL="erasedups:ignoreboth"
+
+#  New commands are append to the history file, instead of overwriting it
+shopt -s histappend
+
+# Save multi-line commands as one command
+shopt -s cmdhist
+
+# Record each line as it gets issued
+PROMPT_COMMAND='history -a'
+
+# Set the maximum number of history entries in memory and in the file to huge values.
+# 	Doesn't appear to slow things down, so why not? 
+# See HISTSIZE and HISTFILESIZE in bash(1) for more information
+HISTSIZE=500000
+HISTFILESIZE=100000
+
+# Don't record some commands
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
+
+
+### 'less' CONFIGURATION ###
+
+# Makes less more capable of handling non-text files by preprocessing them
+# See lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# set variable identifying the chroot you work in (used in the prompt below)
+
+### PROMPT CUSTOMIZATION ###
+
+# Sets the 'debian_chroot' variable to indicate if the shell is running in a
+# 	chroot enviroment
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
+# Adds colors to the prompt if the terminal supports it (xterm-color, *-256color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
+# Includes username ('\u'), hostname ('\h'), and working directory ('\w').
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
-unset color_prompt force_color_prompt
+unset color_prompt 
 
-# If this is an xterm set the title to user@host:dir
+
+### SET TERMINAL TITLE ###
+
+# Sets the terminal title to display 'username@hostname: current-directory'
 case "$TERM" in
 xterm*|rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
@@ -76,7 +107,10 @@ xterm*|rxvt*)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
+
+### COLOR SUPPORT FOR COMMANDS ###
+
+# Adds color to commands like 'ls', 'grep', and others for better readability
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
@@ -88,30 +122,10 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+### BASH COMPLETION ###
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+# Enables advanced command-line completion for tools like 'git'
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -121,26 +135,11 @@ if ! shopt -oq posix; then
 fi
 
 
-# automatically start ssh-agent when shell is launched
-# taken from github docs (https://docs.github.com/en/authentication/connecting-to-github-with-ssh/working-with-ssh-key-passphrases#auto-launching-ssh-agent-on-git-for-windows)
-env=~/.ssh/agent.env
+### FUNCTIONS ###
 
-agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
-
-agent_start () {
-	(umask 077; ssh-agent >| "$env")
-	. "$env" >| /dev/null ; }
-
-agent_load_env
-
-# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2=agent not running
-agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
-
-if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
-	agent_start
-	ssh-add
-elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
-	ssh-add
-fi
-
-unset env
+# Add a directory to $PATH
+pathadd() {
+	if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]] ; then
+		PATH="$1${PATH:+":$PATH"}"
+	fi
+}
