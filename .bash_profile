@@ -14,7 +14,7 @@ export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 
 # Set some variables
-export EDITOR=vim
+export EDITOR=nvim
 export PAGER=less
 
 # Set default less(1) options

@@ -15,6 +15,7 @@
 [pull]
 	ff = only
 [alias]
+	a = add
 	c = commit
 	cam = commit --amend --no-edit
 	co = checkout

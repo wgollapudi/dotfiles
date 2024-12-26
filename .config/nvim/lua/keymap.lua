@@ -11,8 +11,17 @@ vim.api.nvim_create_user_command("WQ", "wq", { desc = "Same as :wq" })
 vim.api.nvim_create_user_command("Wqa", "wqa", { desc = "Same as :wqa" })
 vim.api.nvim_create_user_command("WQa", "wqa", { desc = "Same as :wqa" })
 
+-- Split pane navigation
+vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = "Move to pane on left" })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = "Move to pane right" })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = "Move to pane above" })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = "Move to pane on right" })
+
 -- Toggle cursor line
 vim.keymap.set("n", "<leader>cl", ":set cursorline!<CR>")
+
+-- Toggle spell check
+vim.keymap.set('n', '<leader>s', "<cmd>set spell!<cr>", { desc = "Toggle spell check" })
 
 -- Make Y yank to the end of the line
 vim.keymap.set("n", "Y", "y$")
@@ -38,3 +47,6 @@ vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, { desc = "(Find 
 vim.keymap.set('n', '<C-p>', telescope_builtin.find_files, { desc = "Search for file" })
 vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, { desc = "(Find Buffer) Search in buffers" })
 vim.keymap.set('n', '<leader>fg', telescope_builtin.git_files, { desc = "(Find Git) Search in Git-tracked files" })
+vim.keymap.set('n', "<leader>ft", telescope_builtin.live_grep, { desc = "(Find Text) Search for text (live grep)" })
+
+-- vim: ft=lua sw=4 ts=4 et fdm=marker fmr={{{,}}} foldlevel=2
