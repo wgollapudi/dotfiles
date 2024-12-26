@@ -1,4 +1,4 @@
-###
+#builtin.find_files, { desc = 'Telescope find files (respects .gitignore' }##
 ### LOGIN SHELL INITALIZATION SCRIPT
 ###
 ### Copyright (C) 2024 Walker Gollapudi <wgollapudi@outlook.com>
