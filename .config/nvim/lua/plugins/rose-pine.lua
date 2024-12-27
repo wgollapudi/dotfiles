@@ -1,3 +1,4 @@
+-- Rose-pine theme for neovim
 return {
     "rose-pine/neovim",
     name = "rose-pine",
