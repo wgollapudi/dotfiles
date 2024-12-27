@@ -22,5 +22,3 @@ end)
 pcall (function()
     require("extras")
 end)
-
--- vim: ft=lua sw=4 ts=4 st fdm=marker fmr={{{,}}} foldlevel=2

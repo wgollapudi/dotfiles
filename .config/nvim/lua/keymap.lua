@@ -48,5 +48,3 @@ vim.keymap.set('n', '<C-p>', telescope_builtin.find_files, { desc = "Search for 
 vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, { desc = "(Find Buffer) Search in buffers" })
 vim.keymap.set('n', '<leader>fg', telescope_builtin.git_files, { desc = "(Find Git) Search in Git-tracked files" })
 vim.keymap.set('n', "<leader>ft", telescope_builtin.live_grep, { desc = "(Find Text) Search for text (live grep)" })
-
--- vim: ft=lua sw=4 ts=4 et fdm=marker fmr={{{,}}} foldlevel=2

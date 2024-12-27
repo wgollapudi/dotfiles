@@ -98,5 +98,3 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.commentstring = "# %s"
     end
 })
-
--- vim: ft=lua sw=4 ts=4 et fdm=marker fmr={{{,}}} foldlevel=2
