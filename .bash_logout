@@ -1,8 +1,5 @@
 ### ~/.bash_logout: executed by bash(1) when login shell exits.
 
-# Remove all temporary files created in /tmp for this session
-rm -rf /tmp/*"$USER"* 2>/dev/null
-
 # Force save history
 history -a
 
