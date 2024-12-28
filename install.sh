@@ -21,7 +21,7 @@ then
     force=1
 fi
 
-for file in "$files[@]}"; do
+for file in "${files[@]}"; do
     exclude=0
     for ex_file in "${exclude_files[@]}"; do
         if [ "$file" = "$ex_file" ]; then
@@ -33,7 +33,9 @@ for file in "$files[@]}"; do
     if [ "$exclude" -eq 0 ]; then
         target="$HOME/$file"
         if [ -e "$target" ]; then
-            warnings+=("Warning: $target already exists. Unable to create symlink.")
+            warning="Warning: $target already exists. Unable to create symlink."
+            echo -e "\033[31m$warning\033[0m"
+            warnings+=($warning)
         else
             dir="$(dirname "$file")"
             mkdir -p "$HOME/$dir"
@@ -45,7 +47,7 @@ done
 
 if [ "${#warnings[@]}" -gt 0 ]; then
     echo
-    echo -e "\033[31mSummary of warnings:\033[0m"
+    echo -e "Summary of warnings:"
     for w in "${warnings[@]}"; do
         echo -e "\033[31m$w\033[0m"
     done
