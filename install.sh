@@ -37,6 +37,7 @@ do
         if [ -L "$target" ] || [ -e "$target" ]
         then
             overwrite_flag=1
+            echo "\033[31mWarning: $target already exists.\033[0m"
         else
             dir="$(dirname "$file")"
             mkdir -p "$HOME/$dir"
