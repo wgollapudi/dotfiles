@@ -13,6 +13,7 @@ exclude_files=(
 
 dotdir="$(realpath "$(dirname "$0")")"
 declare -a warnings=()
+installed_count=0
 mapfile -t files < <(git ls-files --recurse-submodules)
 
 unset force
@@ -51,6 +52,7 @@ for file in "${files[@]}"; do
             dir="$(dirname "$file")"
             mkdir -p "$HOME/$dir"
             ln -vs ${force:+-f} "$dotdir/$file" "$target"
+            ((installed_count++))
         fi
     fi
 done
@@ -62,4 +64,9 @@ if [ "${#warnings[@]}" -gt 0 ]; then
     for w in "${warnings[@]}"; do
         echo -e "\033[31m$w\033[0m"
     done
+else
+    if [ "$installed_count" -eq 0]; then
+        echo
+        echo "Nothing happened: All items have been successfully installed."
+    fi
 fi
