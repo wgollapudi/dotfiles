@@ -13,6 +13,7 @@ exclude_files=(
 
 dotdir="$(realpath "$(dirname "$0")")"
 declare -a warnings=()
+mapfile -t files < <(git ls-files --recurse-submodules)
 
 unset force
 if [ "$1" = '-f' ]
@@ -20,7 +21,7 @@ then
     force=1
 fi
 
-git ls-files --recurse-submodules | while IFS='' read -r file; do
+for file in "$files[@]}"; do
     exclude=0
     for ex_file in "${exclude_files[@]}"; do
         if [ "$file" = "$ex_file" ]; then
@@ -31,7 +32,7 @@ git ls-files --recurse-submodules | while IFS='' read -r file; do
 
     if [ "$exclude" -eq 0 ]; then
         target="$HOME/$file"
-        if [ -e "$target" ] || [ -L "$target" ]; then
+        if [ -e "$target" ]; then
             warnings+=("Warning: $target already exists. Unable to create symlink.")
         else
             dir="$(dirname "$file")"
@@ -46,6 +47,6 @@ if [ "${#warnings[@]}" -gt 0 ]; then
     echo
     echo -e "\033[31mSummary of warnings:\033[0m"
     for w in "${warnings[@]}"; do
-        echo -e "\033[31mWarning: Some files or symlinks were unable to be created. Precede with Caution.\033[0m"
+        echo -e "\033[31m$w\033[0m"
     done
 fi
