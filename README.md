@@ -27,4 +27,4 @@ Don't worry if you encounter a Warning, just move your existing files elsewhere 
 ## Acknowledgements
 These files are esentially a modified fork of [Kian Kasad`s](https://github.com/kdkasad) excellent [dotfiles](https://github.com/kdkasad/dotfiles). A lot (most) of this code is copied or inspired from his work / our conversations.
 
-I`ll move to zsh eventually...
+I'm planning on moving to zsh eventually... but that's a lot of work I could put off instead.
