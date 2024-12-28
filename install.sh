@@ -66,7 +66,6 @@ if [ "${#warnings[@]}" -gt 0 ]; then
     done
 else
     if [ "$installed_count" -eq 0 ]; then
-        echo
         echo "Nothing happened: All items have been successfully installed."
     fi
 fi

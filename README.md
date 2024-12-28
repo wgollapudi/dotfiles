@@ -22,6 +22,7 @@ After installation, reload your shell:
 ```bash
 source ~/.bash_profile
 ```
+Don't worry if you encounter a Warning, just move your existing files elsewhere and run the installation script again, it will take care of everything.
 
 ## Acknowledgements
 These files are esentially a modified fork of [Kian Kasad`s](https://github.com/kdkasad) excellent [dotfiles](https://github.com/kdkasad/dotfiles). A lot (most) of this code is copied or inspired from his work / our conversations.
