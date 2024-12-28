@@ -65,7 +65,7 @@ if [ "${#warnings[@]}" -gt 0 ]; then
         echo -e "\033[31m$w\033[0m"
     done
 else
-    if [ "$installed_count" -eq 0]; then
+    if [ "$installed_count" -eq 0 ]; then
         echo
         echo "Nothing happened: All items have been successfully installed."
     fi
