@@ -33,9 +33,20 @@ for file in "${files[@]}"; do
     if [ "$exclude" -eq 0 ]; then
         target="$HOME/$file"
         if [ -e "$target" ]; then
-            warning="Warning: $target already exists. Unable to create symlink."
-            echo -e "\033[31m$warning\033[0m"
-            warnings+=("$warning")
+            if [ -L "$target" ]; then
+                current_link="$(readlink "$target")"
+                if [ "$current_link" = "$dotdir/$file" ]; then
+                    continue
+                else
+                    "Warning: Symlink $target already exists but points to $current_link. Skipping."
+                    echo -e "\033[31m$warning\033[0m"
+                    warnings+=("$warning")
+                fi
+            else
+                warning="Warning: File or directory $target already exists. Skipping."
+                echo -e "\033[31m$warning\033[0m"
+                warnings+=("$warning")
+            fi
         else
             dir="$(dirname "$file")"
             mkdir -p "$HOME/$dir"
