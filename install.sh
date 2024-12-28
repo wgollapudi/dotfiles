@@ -35,7 +35,7 @@ for file in "${files[@]}"; do
         if [ -e "$target" ]; then
             warning="Warning: $target already exists. Unable to create symlink."
             echo -e "\033[31m$warning\033[0m"
-            warnings+=($warning)
+            warnings+=("$warning")
         else
             dir="$(dirname "$file")"
             mkdir -p "$HOME/$dir"
