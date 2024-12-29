@@ -1,6 +1,6 @@
 # Walker`s dotfiles
 
-Dotfiles are how you configure and personalize your system. These are mine
+Dotfiles are how you configure and personalize your system. These are mine.
 
 Because dotfiles are hidden by default, you might want to use `ls -A` when looking through the repository.
 

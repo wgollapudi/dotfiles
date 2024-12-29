@@ -7,7 +7,7 @@ vim.keymap.set("i", "treu", "true")
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "c", "cpp", "java", "yacc" },
     callback = function()
-        vim.keymap.set("ia", "com", "/* */<left><left><left>", {
+        vim.keymap.set("i", "com", "/* */<left><left><left>", {
             buffer = 0,
         })
     end,

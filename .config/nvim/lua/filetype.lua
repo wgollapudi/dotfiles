@@ -48,7 +48,7 @@ vim.api.nvim_create_autocmd("BufReadPre", {
 
 -- No scrolloff for help pages
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "help"
+    pattern = "help",
     callback = function()
         vim.wo.scrolloff = 0
     end,
@@ -57,7 +57,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Set comment marker for Typst files
 -- Use 2-space indentation for Typst files
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "typst"
+    pattern = "typst",
     callback = function()
         vim.bo.commentstring = "// %s"
         vim.bo.expandtab = true

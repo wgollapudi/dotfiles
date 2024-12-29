@@ -40,12 +40,12 @@ for file in "${files[@]}"; do
                     continue
                 else
                     "Warning: Symlink $target already exists but points to $current_link. Skipping."
-                    echo -e "\033[31m$warning\033[0m"
+                    printf "\033[31m$warning\033[0m\n"
                     warnings+=("$warning")
                 fi
             else
                 warning="Warning: File or directory $target already exists. Skipping."
-                echo -e "\033[31m$warning\033[0m"
+                printf "\033[31m$warning\033[0m\n"
                 warnings+=("$warning")
             fi
         else
