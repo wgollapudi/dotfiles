@@ -10,6 +10,7 @@ local ensure_installed_parsers = {
     "css",
     "make",
     "bash",
+    "json",
 }
 
 -- Tree-sitter (for syntax highlighting & indenting)

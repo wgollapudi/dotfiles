@@ -19,6 +19,11 @@ vim.o.expandtab = true
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- Enable Nerd Font
+vim.g.have_nerd_font = true;
+
+vim.o.updatetime=4000
+
 -- Don't highlight search results
 vim.o.hlsearch = false
 
@@ -63,12 +68,22 @@ vim.o.autowrite = true
 
 -- Enable mouse integration
 vim.o.mouse = "a"
+vim.o.mousemodel=extend
 
 -- Search recursiely (up to 3 levels deep) for files
 vim.opt.path:append({ "***3" })
 
 -- Show current position within file
 vim.o.ruler = true
+
+-- Sync clipboard between OS and Neovim
+-- Schedule the setting after 'UiEnter' because it can ncrease startup-time
+vim.schedule(function()
+    vim.opt.clipboard = 'unnamedplus'
+end)
+
+-- Enable break indent
+vim.o.breakindent = true;
 
 -- Expand wildcards in command line
 vim.o.wildmenu = true
