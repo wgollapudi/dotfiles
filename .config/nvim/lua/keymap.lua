@@ -48,3 +48,16 @@ vim.keymap.set('n', '<C-p>', telescope_builtin.find_files, { desc = "Search for 
 vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, { desc = "(Find Buffer) Search in buffers" })
 vim.keymap.set('n', '<leader>fg', telescope_builtin.git_files, { desc = "(Find Git) Search in Git-tracked files" })
 vim.keymap.set('n', "<leader>ft", telescope_builtin.live_grep, { desc = "(Find Text) Search for text (live grep)" })
+
+-- Neo-tree (file browser)
+vim.keymap.set('n', "<leader>nt", function()
+    require("neo-tree.command").execute({
+        toggle = true,
+        position = "current",
+    })
+end, { desc = "Toggle Neo-tree in full screen" })
+vim.keymap.set('n', "\\", "<cmd>Neotree filesystem reveal left toggle<CR>", { desc = "Toggle Neo-tree in sidebar" })
+vim.keymap.set('n', '<leader>..', function()
+    local neo_tree = require("neo-tree.sources.filesystem")
+    neo_tree.navigate_up()
+end, { desc = "Go to parent directory in Neo-tree" })
