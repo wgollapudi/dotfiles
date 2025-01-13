@@ -96,11 +96,11 @@ Move your extracted binaries to a library directory
 ```bash
 cd ~
 mkdir library
-mv /tarballs/nvim-linux64 /library/nvim-linux64
+mv tarballs/nvim-linux64 library/nvim-linux64
 ```
 Then, open your shell configuration (e.g. `~/.bashrc`, `~/.zshrc`) and add the following line
 ```bash
-export PATH=$HOME/nvim-linux64/bin:$PATH
+export PATH=$HOME/library/nvim-linux64/bin:$PATH
 ```
 Reload your shell
 
