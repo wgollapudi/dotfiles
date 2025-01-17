@@ -34,7 +34,7 @@ pcall(function()
             { "nvim-telescope/telescope-ui-select.nvim", enabled = true },
             { "folke/which-key.nvim", enabled = false },
             { "echasnovski/mini.icons", enabled = true },
-
+            { "chomosuke/typst-preview", enabled = true },
         },
         -- Configure any other settings here. See the documentation for more details.
         -- colorscheme that will be used when installing plugins.
