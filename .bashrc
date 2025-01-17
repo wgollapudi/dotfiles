@@ -143,3 +143,6 @@ pathadd() {
 		PATH="$1${PATH:+":$PATH"}"
 	fi
 }
+
+### RUST PATH MODIFICATION ###
+. "$HOME/.cargo/env"

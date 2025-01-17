@@ -48,3 +48,6 @@ export PATH
 
 # Set default permissions to rwxrwx---
 umask 007
+
+# Rust path modification
+. "$HOME/.cargo/env"
