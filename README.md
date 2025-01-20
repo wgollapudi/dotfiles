@@ -20,7 +20,7 @@ bash install.sh
 
 3. **Source the Shell Configuration**:
 
-After installation, reload your shell:
+After installation, reload your shell;
 ```bash
 source ~/.bash_profile
 ```
