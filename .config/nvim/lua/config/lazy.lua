@@ -32,7 +32,7 @@ pcall(function()
             { "rose-pine/neovim", enabled = true },
             { 'nvim-telescope/telescope.nvim', enabled = true },
             { "nvim-telescope/telescope-ui-select.nvim", enabled = true },
-            { "folke/which-key.nvim", enabled = false },
+            { "folke/which-key.nvim", enabled = true },
             { "echasnovski/mini.icons", enabled = true },
             { "chomosuke/typst-preview.nvim", enabled = true },
             { "williamboman/mason.nvim", enabled = true },

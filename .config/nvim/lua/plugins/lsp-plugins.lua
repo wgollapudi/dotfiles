@@ -2,8 +2,8 @@ local ensure_installed_lsps = {
     "lua_ls",
     "clangd",
     "texlab",
-    "typst_lsp",
-    "jedi_language_server",
+--    "typst-lsp", -- Install via Mason
+--    "jedi-langauge-server" -- Install via Mason (":MasonInstall"), also requires python3-venv
 }
 
 local gen_null_ls_sources = function(null_ls)
