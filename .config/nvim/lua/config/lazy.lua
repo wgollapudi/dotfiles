@@ -36,7 +36,6 @@ pcall(function()
             { "echasnovski/mini.icons", enabled = true },
             { "chomosuke/typst-preview.nvim", enabled = true },
             { "williamboman/mason.nvim", enabled = true },
-            { "folke/todo-comments.nvim" enabled = true },
         },
         -- Configure any other settings here. See the documentation for more details.
         -- colorscheme that will be used when installing plugins.
