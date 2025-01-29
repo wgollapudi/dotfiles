@@ -41,6 +41,9 @@ alias python=python3
 ### Refresh Bash ###
 alias refresh='source ~/.bash_profile'
 
+### Stupid Things ###
+alias walker=neofetch
+
 ### UBUNTU ALERT ALIAS
 # Sends a desktop notification when a long-running command completes
 # Sample usage : sleep 10; alert
