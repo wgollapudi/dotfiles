@@ -107,7 +107,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-
 ### COLOR SUPPORT FOR COMMANDS ###
 
 # Adds color to commands like 'ls', 'grep', and others for better readability
@@ -146,3 +145,8 @@ pathadd() {
 
 ### RUST PATH MODIFICATION ###
 . "$HOME/.cargo/env"
+
+### SOURCE DATA SPECIFIC CHANGES ###
+if [ -f "$HOME/.data_bash_profile" ] ; then
+    . "$HOME/.data_bash_profile"
+fi
