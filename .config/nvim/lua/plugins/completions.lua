@@ -1,8 +1,10 @@
 return {
     {
         "hrsh7th/nvim-cmp",
+        enabled = true,
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
+            enabled = true,
         },
         config = function()
             local cmp = require("cmp")
@@ -19,23 +21,18 @@ return {
                 },
                 mapping = cmp.mapping.preset.insert({
                     -- TODO: Put these in keymap.lua
-                    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+                    ["<C-k>"] = cmp.mapping.scroll_docs(-4),
+                    ["<C-j>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete(),
                     ["<C-e>"] = cmp.mapping.abort(),
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        -- This snippet will confirm with tab
-                        -- If no entry is selected, it will confirm the first item
-                        if cmp.visible() then
-                            local entry = cmp.get_selected_entry()
-                            if not entry then
-                                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                            end
-                            cmp.confirm()
+                    ["<CR>"] = cmp.mapping.confirm({ select = false }),
+                    ["<C-d>"] = function()
+                        if cmp.visible_docs() then
+                            cmp.close_docs()
                         else
-                            fallback()
+                            cmp.open_docs()
                         end
-                    end, {"i", "s", "c",}),
+                    end,
                 }),
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },

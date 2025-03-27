@@ -27,15 +27,6 @@ pcall(function()
         spec = {
             -- import your plugins
             { import = "plugins" },
-            { "nvim-treesitter/nvim-treesitter", enabled = true },
-            { "lewis6991/gitsigns.nvim", enabled = true },
-            { "rose-pine/neovim", enabled = true },
-            { 'nvim-telescope/telescope.nvim', enabled = true },
-            { "nvim-telescope/telescope-ui-select.nvim", enabled = true },
-            { "folke/which-key.nvim", enabled = true },
-            { "echasnovski/mini.icons", enabled = true },
-            { "chomosuke/typst-preview.nvim", enabled = true },
-            { "williamboman/mason.nvim", enabled = true },
         },
         -- Configure any other settings here. See the documentation for more details.
         -- colorscheme that will be used when installing plugins.
