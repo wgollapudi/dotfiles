@@ -1,7 +1,12 @@
+---@type LazySpec[]
 return {
+    --- Display notifications and LSP progress messages in the bottom right corner
     {
         "j-hui/fidget.nvim",
-        enabled = false,
+        enabled = true,
+        lazy = true,
+        cmd = "Fidget",
+        event = "LspAttach",
         opts = {},
     },
 
@@ -9,6 +14,7 @@ return {
     {
         "sphamba/smear-cursor.nvim",
         enabled = false,
+        event = "VeryLazy",
         opts = {
             smear_insert_mode = false,
             vertical_bar_cursor_insert_mode = true,
@@ -20,22 +26,12 @@ return {
     -- Breadcrumbs bar
     {
         "Bekaboo/dropbar.nvim",
+        event = LazyFile,
         config = function()
-            local ok, dropbar_api = pcall(require, "dropbar.api")
-            if not ok then
-                vim.notify("dropbar.api failed to load", vim.log.levels.ERROR)
-                return
-            end
-
-            if dropbar_api.pick then
-                vim.keymap.set("n", "<leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
-            end
-            if dropbar_api.goto_content_start then
-                vim.keymap.set("n", "[;", dropbar_api.goto_content_start, { desc = "Go to start of current context" })
-            end
-            if dropbar_api.select_next_context then
-                vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
-            end
+            local dropbar_api = require("dropbar.api")
+            vim.keymap.set("n", "<leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
+            vim.keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })
+            vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
         end,
     },
 
@@ -78,12 +74,36 @@ return {
                         include_current = true,
                         include_declaration = true,
                     },
+                    notifications = {
+                        win = {
+                            preview = { wo = { wrap = true } },
+                        },
+                    },
                 },
             },
             -- File explorer
             explorer = { enabled = true, replace_netrw = true },
             -- Open files quickly
             quickfile = { enabled = true },
+            -- Styles
+            styles = {
+                notification = { wo = { wrap = true } },
+                notificaiton_history = { wo = { wrap  = true } },
+            },
+            -- Image support via Kitty protocol
+            image = {
+                enabled = true,
+                -- Render TeX/Typst math in-editor
+                math = {
+                    enabled = false,
+                },
+                -- Convert PDFs to higher-resolution PNGs
+                convert = {
+                    magick = {
+                        pdf = { "-density", 300, "{src}[0]", "-background", "white", "-alpha", "remove", "-trim" },
+                    },
+                },
+            },
         },
     },
 
@@ -119,5 +139,11 @@ return {
                 },
             },
         },
+    },
+
+    -- Required for bufferline.nvim
+    {
+        "nvim-tree/nvim-web-devicons",
+         lazy = true,
     },
 }

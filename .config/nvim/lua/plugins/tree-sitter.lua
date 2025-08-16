@@ -18,7 +18,8 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         lazy = true,
-        event = "VimEnter",
+        event = LazyFile,
+        cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
         build = ":TSUpdate",
         config = function()
             -- Set up parsers

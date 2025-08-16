@@ -15,6 +15,7 @@ pcall(function()
         end
     end
     vim.opt.rtp:prepend(lazypath)
+    LazyFile = { "BufReadPost", "BufWritePost", "BufNewFile" }
 
     -- Make sure to setup `mapleader` and `maplocalleader` before
     -- loading lazy.nvim so that mappings are correct.

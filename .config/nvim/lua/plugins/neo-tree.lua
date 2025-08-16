@@ -1,3 +1,4 @@
+---@type LazySpec[]
 -- Neo-tree (file browser)
 return {
     "nvim-neo-tree/neo-tree.nvim",

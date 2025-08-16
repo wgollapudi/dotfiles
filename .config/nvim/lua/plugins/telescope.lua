@@ -1,3 +1,4 @@
+---@type LazySpec[]
 -- Telescope (nvim fuzzy finder)
 return {
     {

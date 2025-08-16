@@ -1,3 +1,4 @@
+---@type LazySpec
 -- Rose-pine theme for neovim
 return {
     "rose-pine/neovim",

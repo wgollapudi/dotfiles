@@ -1,3 +1,4 @@
+---@type LazySpec[]
 -- Git-related plugins
 return {
     -- Git status signs
