@@ -57,28 +57,28 @@ To circumvent this, I downloaded the bianarys myself. Because this is meant to b
 
 1. **Download the Latest (stable) Neovim Tarball**
 
-Go to Neovim's [Release Page](https://github.com/neovim/neovim/releases) and find the latest stable release. At the bottom, under "Assets", look for a link to a file named `nvim-linux64.tar.gz`. Then, use that link to download the Tarball. I downloaded Neovim 0.10.3, which made the link to my tarball [https://github.com/neovim/neovim/releases/download/v0.10.3/nvim-linux64.tar.gz](https://github.com/neovim/neovim/releases/download/v0.10.3/nvim-linux64.tar.gz).
+Go to Neovim's [Release Page](https://github.com/neovim/neovim/releases) and find the latest stable release. At the bottom, under "Assets", look for a link to a file named `nvim-linux64.tar.gz`. Then, use that link to download the Tarball. I downloaded Neovim 0.11.3, which made the link to my tarball [https://github.com/neovim/neovim/releases/download/v0.11.3/nvim-linux-x86_64.tar.gz](https://github.com/neovim/neovim/releases/download/v0.11.3/nvim-linux-x86_64.tar.gz).
 ```bash
 cd ~
 mkdir tarballs
 cd tarballs
-wget https://github.com/neovim/neovim/releases/download/v0.10.3/nvim-linux64.tar.gz
+wget https://github.com/neovim/neovim/releases/download/v0.11.3/nvim-linux-x86_64.tar.gz
 ```
 
 2. **Extract the Tarball**
 
 Once the tarball is downloaded
 ```bash
-tar xzf nvim-linux64.tar.gz
+tar xzf nvim-linux-x86_64.tar.gz
 ```
-This creates a folder named `nvim-linux64` (name may vary slighty by version)
+This creates a folder named `nvim-linux-x86_64` (name may vary slighty by version)
 
 ### If you are root
 3a. **Move Neovim to a System Directory**
 
 `/usr/local` is the standard location for user-installed software. Some may prefer `/opt`, though.
 ```bash
-sudo mv nvim-linux64 /usr/local/nvim
+sudo mv nvim-linux-x86_64 /usr/local/nvim
 ```
 
 3b. **Create a Symlink (So You Can Run `nvim`)**
@@ -100,7 +100,7 @@ mv tarballs/nvim-linux64 library/nvim-linux64
 ```
 Then, open your shell configuration (e.g. `~/.bashrc`, `~/.zshrc`) and add the following line
 ```bash
-export PATH=$HOME/library/nvim-linux64/bin:$PATH
+export PATH=$HOME/library/nvim-linux-86_64/bin:$PATH
 ```
 Reload your shell
 
